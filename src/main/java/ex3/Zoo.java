@@ -3,30 +3,27 @@ package ex3;
 import java.util.List;
 
 public class Zoo {
+    private String zooName;
+    private List<Animal> animaux;
 
-    private String nom;
-    private List<String> types;
-    private List<String> noms;
-    private List<String> comportements;
-
-    public Zoo(String nom) {
-        this.nom = nom;
+    public Zoo(String zooname) {
+        this.zooName = zooname;
     }
 
     public void addAnimal(String nomAnimal, String typeAnimal, String comportement) {
-        types.add(typeAnimal);
-        noms.add(nomAnimal);
-        comportements.add(comportement);
+        Animal animal = new Animal(nomAnimal, typeAnimal, comportement);
+        this.animaux.add(animal);
     }
 
     public void afficherListeAnimaux() {
-        for (int i = 0; i < types.size(); i++) {
-            System.out.println(noms.get(i) + " " + types.get(i) + " " + comportements.get(i));
+        for (Animal animal : animaux) {
+            System.out.println(animal.getName() + " " + animal.getType() + " " + animal.getComportement());
         }
     }
 
+
     public int taille() {
-        return types.size();
+        return animaux.size();
     }
 
     /**
@@ -35,7 +32,7 @@ public class Zoo {
      * @return the nom
      */
     public String getNom() {
-        return nom;
+        return zooName;
     }
 
     /**
@@ -44,6 +41,6 @@ public class Zoo {
      * @param nom the nom to set
      */
     public void setNom(String nom) {
-        this.nom = nom;
+        this.zooName = nom;
     }
 }

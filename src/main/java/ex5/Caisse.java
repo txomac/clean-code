@@ -7,17 +7,34 @@ public class Caisse {
 
     private String nom;
     private List<Item> items;
+    private int min_size;
+    private int max_size;
 
     /**
      * Constructeur
      *
      * @param nom
+     * @param minSize
+     * @param maxSize
      */
-    public Caisse(String nom) {
+    public Caisse(String nom, int minSize, int maxSize) {
         super();
         this.nom = nom;
+        min_size = minSize;
+        max_size = maxSize;
         this.items = new ArrayList<>();
     }
+
+    public boolean peutContenirItem(Item item) {
+        int poidsTotal = items.stream().mapToInt(Item::getPoids).sum();
+        int nouvelPoidsTotal = poidsTotal + item.getPoids();
+
+        return nouvelPoidsTotal <= max_size &&
+                (nouvelPoidsTotal < 5 || (nouvelPoidsTotal >= 5 && nouvelPoidsTotal <= 20) || nouvelPoidsTotal >= 20);
+    }
+
+
+
 
     /**
      * Getter pour l'attribut nom
@@ -54,5 +71,4 @@ public class Caisse {
     public void setItems(List<Item> items) {
         this.items = items;
     }
-
 }

@@ -70,21 +70,17 @@ public class CompteBancaire {
      */
     public void debiterMontant(double montant) {
         if (type.equals("CC")) {
-            if (this.solde - montant > decouvert) {
-                this.solde = solde - montant;
+            if (this.solde - montant >= getDecouvert()) {
+                this.solde -= montant;
             }
         } else if (type.equals("LA")) {
-            if (this.solde - montant > 0) {
-                this.solde = solde - montant;
+            if (this.solde - montant > this.getSolde()) {
+                this.solde -= montant;
             }
         }
     }
 
-    public void appliquerRemuAnnuelle() {
-        if (type.equals("LA")) {
-            this.solde = solde + solde * tauxRemuneration / 100;
-        }
-    }
+
 
     /**
      * Getter for solde
